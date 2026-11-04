@@ -1,0 +1,53 @@
+---
+layout: runbook
+title: '#4471 · three problems, not one'
+owner: a-padinha
+status: living
+reviewed: 2026-11-04
+signature: a-padinha
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+[#4471](/kb/incidents/4471) was merged as one issue, "dates parse mm/dd in eu locales". Counted by
+cause instead of by subject line, it holds three different problems. Each needs its own ticket and
+its own fix.
+
+<Callout kind="warn">
+The queued fix covers the first problem only. The other two stay broken after it ships.
+</Callout>
+
+## The three problems
+
+<ProblemTable ticket={4471} />
+
+1. **`parser`.** The shared parser reads every date month first. A day-first tenant's dates come out
+   flipped. This is the bug #4471 was filed for, and it covers most of the reports.
+2. **`hint`.** The booking-v3 form prints `MM/DD/YYYY` under its date field. People at day-first tenants
+   type what the hint tells them, and the form reads it their way. The parser fix does not touch this.
+3. **`one-day shift`.** The date moves by exactly one day, not by a month swap. One report names
+   Lisbon and Toronto, and another says an invite arrived before the booking existed, so a time zone
+   conversion is the lead. The cause is not confirmed.
+   The desk's own notes (`desk-notes.json`) already read these reports as a one-day move, yet they were
+   filed under the parser because of their tenant.
+
+## How the count was made
+
+- One report id counts once. The ticket system exports in overlapping pages, so the same report can
+  come twice.
+- The cause comes from the tenant (its locale and booking form), as in `causes.ts`. Intake's tag is a
+  guess made from the reporter's browser, and the last column shows how often it disagrees.
+- The numbers are computed on every build. Nobody types them into this page.
+
+## What to do
+
+- Open one ticket per problem, each with the number of reports it covers.
+- Do not close the `hint` and `one-day shift` reports when the parser fix ships.
+- Replace [decision 0001](/kb/decisions/0001-dedupe-by-subject) with a record that merges on cause.
+  Merging on the subject line is how three problems became one ticket.
+
+<RenderStamp {signature} />
