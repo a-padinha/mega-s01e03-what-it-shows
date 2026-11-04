@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 · two problems, not one'
 owner: a-padinha
-status: living
+status: closed
 reviewed: 2026-11-04
 signature: a-padinha
 ---
@@ -18,7 +18,7 @@ cause instead of by subject line, it holds two different problems. Each needs it
 its own fix.
 
 <Callout kind="warn">
-The queued fix covers the first problem only. The second stays broken after it ships.
+Closed 5 October. `parser` was fixed. `hint` will not be fixed, because the booking-v3 form was retired.
 </Callout>
 
 ## The two problems
@@ -42,11 +42,17 @@ footnoted in the table. If a one-day shift turns out to be its own bug, it needs
   guess made from the reporter's browser, and the last column shows how often it disagrees.
 - The numbers are computed on every build. Nobody types them into this page.
 
-## What to do
+## Outcome
 
-- Open one ticket per problem, each with the number of reports it covers.
-- Do not close the `hint` reports when the parser fix ships.
-- Replace [decision 0001](/kb/decisions/0001-dedupe-by-subject) with a record that merges on cause.
-  Merging on the subject line is how two problems became one ticket.
+The desk closed #4471 on 5 October.
+
+- **`parser`:** fixed, "parse dd/mm for eu locales".
+- **`hint`:** won't fix. The booking-v3 form was retired, so the hint went with it.
+
+## Lesson
+
+Replace [decision 0001](/kb/decisions/0001-dedupe-by-subject) with a record that merges on cause.
+Merging on the subject line is how two problems became one ticket, and a fix for one would have
+closed the other unseen.
 
 <RenderStamp {signature} />
