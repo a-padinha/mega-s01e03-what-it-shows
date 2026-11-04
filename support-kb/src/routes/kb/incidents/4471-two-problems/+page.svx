@@ -1,6 +1,6 @@
 ---
 layout: runbook
-title: '#4471 · three problems, not one'
+title: '#4471 · two problems, not one'
 owner: a-padinha
 status: living
 reviewed: 2026-11-04
@@ -14,14 +14,14 @@ signature: a-padinha
 </script>
 
 [#4471](/kb/incidents/4471) was merged as one issue, "dates parse mm/dd in eu locales". Counted by
-cause instead of by subject line, it holds three different problems. Each needs its own ticket and
+cause instead of by subject line, it holds two different problems. Each needs its own ticket and
 its own fix.
 
 <Callout kind="warn">
-The queued fix covers the first problem only. The other two stay broken after it ships.
+The queued fix covers the first problem only. The second stays broken after it ships.
 </Callout>
 
-## The three problems
+## The two problems
 
 <ProblemTable ticket={4471} />
 
@@ -29,11 +29,10 @@ The queued fix covers the first problem only. The other two stay broken after it
    flipped. This is the bug #4471 was filed for, and it covers most of the reports.
 2. **`hint`.** The booking-v3 form prints `MM/DD/YYYY` under its date field. People at day-first tenants
    type what the hint tells them, and the form reads it their way. The parser fix does not touch this.
-3. **`one-day shift`.** The date moves by exactly one day, not by a month swap. One report names
-   Lisbon and Toronto, and another says an invite arrived before the booking existed, so a time zone
-   conversion is the lead. The cause is not confirmed.
-   The desk's own notes (`desk-notes.json`) already read these reports as a one-day move, yet they were
-   filed under the parser because of their tenant.
+
+A few `parser` reports describe a date that moved by one day, not a month swap. The desk's notes
+(`desk-notes.json`) read them that way. They are counted under `parser`, where they are filed, and
+footnoted in the table. If a one-day shift turns out to be its own bug, it needs its own ticket.
 
 ## How the count was made
 
@@ -46,8 +45,8 @@ The queued fix covers the first problem only. The other two stay broken after it
 ## What to do
 
 - Open one ticket per problem, each with the number of reports it covers.
-- Do not close the `hint` and `one-day shift` reports when the parser fix ships.
+- Do not close the `hint` reports when the parser fix ships.
 - Replace [decision 0001](/kb/decisions/0001-dedupe-by-subject) with a record that merges on cause.
-  Merging on the subject line is how three problems became one ticket.
+  Merging on the subject line is how two problems became one ticket.
 
 <RenderStamp {signature} />
