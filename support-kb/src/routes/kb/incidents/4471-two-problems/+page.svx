@@ -4,7 +4,7 @@ title: '#4471 · two problems, not one'
 owner: a-padinha
 status: closed
 reviewed: 2026-11-04
-signature: a-padinha
+signature: v1.eyJzdWIiOiI0MzExIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTM4MTYyODUsImV4cCI6MTc5MzkwMjY4NX0.P-ltn_InJUxSX-7vcihV1dF9VcxZ9Eyuqt1jF2JAFzY
 ---
 
 <script>
